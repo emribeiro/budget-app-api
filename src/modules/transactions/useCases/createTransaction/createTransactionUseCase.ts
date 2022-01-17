@@ -1,5 +1,8 @@
 import { TransactionsRepository } from "../../repository/impl/TransactionsRepository";
 
+import dayjs from "dayjs";
+import { Transaction } from "../../model/Transaction";
+
 interface IRequest{
     title: string;
     amount: number;
@@ -10,17 +13,19 @@ interface IRequest{
 
 class CreateTransactionUseCase{
 
-    async execute( { title, amount, type, category, date }: IRequest): Promise<void>{
+    async execute( { title, amount, type, category, date }: IRequest): Promise<Transaction>{
 
         const transactionRepository = new TransactionsRepository();
     
-        await transactionRepository.create( { 
+        const transaction = await transactionRepository.create( { 
             title,
             amount,
             type,
             category,
-            date:  new Date(date)
+            date:  dayjs(date, "YYYY-MM-DD", "pt-br").toDate()
         });
+
+        return transaction;
     }
 
 

@@ -12,7 +12,7 @@ class TransactionsRepository implements ITransactionRepository{
         this.repository = getRepository(Transaction);
     }
 
-    async create({title, amount, type, category, date}: ICreateTransactionDTO): Promise<void> {
+    async create({title, amount, type, category, date}: ICreateTransactionDTO): Promise<Transaction> {
         const transaction = this.repository.create({
             title, 
             amount,
@@ -23,7 +23,7 @@ class TransactionsRepository implements ITransactionRepository{
 
         await this.repository.save(transaction);
 
-
+        return transaction;
     }
 
 

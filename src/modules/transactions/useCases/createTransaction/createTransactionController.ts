@@ -10,9 +10,9 @@ class CreateTransactionController{
 
         const createTransactionUseCase = new CreateTransactionUseCase();
 
-        await createTransactionUseCase.execute( { title, amount, type, category, date});
+        const transaction = await createTransactionUseCase.execute( { title, amount, type, category, date});
 
-        return response.status(201).send();
+        return response.status(201).send(transaction);
 
     }
 

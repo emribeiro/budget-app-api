@@ -22,7 +22,7 @@ class Transaction{
     @Column()
     date: Date;
 
-    @CreateDateColumn()
+    @CreateDateColumn({type: 'timestamptz'})
     created_at: Date;
 
     constructor(){
